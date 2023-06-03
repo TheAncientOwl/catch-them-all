@@ -1,12 +1,7 @@
 import './style.css';
 
-import SceneRenderer from './SceneRenderer';
+import Game from './Game';
 
-let scene = new SceneRenderer(true);
+const game = new Game();
 
-// loops updates
-(function loop() {
-  scene.render();
-
-  requestAnimationFrame(loop);
-})();
+game.run();

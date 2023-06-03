@@ -6,10 +6,6 @@ import Timer from './Timer';
 import Ground from './Ground';
 
 export default class Game {
-  private static PLAYER_MOVE_SPEED: number = 7;
-  private static GROUND_WIDTH: number = 15;
-  private static GROUND_HEIGHT: number = 6;
-
   private sceneRenderer: SceneRenderer;
   private lightingManager: LightingManager;
   private inputManager: InputManager;

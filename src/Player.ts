@@ -7,7 +7,7 @@ export default class Player {
 
   public constructor() {
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff9900 });
+    const material = new THREE.MeshBasicMaterial({ color: 0x006600 });
 
     this.cube = new THREE.Mesh(geometry, material);
     this.cube.position.y = 0.5;

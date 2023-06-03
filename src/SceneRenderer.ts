@@ -18,7 +18,7 @@ export default class SceneRenderer extends THREE.Scene {
     this.camera = this.createCamera();
     this.renderer = this.createRenderer();
     this.orbitals = new OrbitControls(this.camera, this.renderer.domElement);
-    this.background = new THREE.Color(0xefefef);
+    this.background = new THREE.Color(0x1c1c1c);
 
     this.addWindowResizing(this.camera, this.renderer);
 

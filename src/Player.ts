@@ -8,7 +8,7 @@ type Boundaries = {
 };
 
 export default class Player {
-  public static readonly MOVE_SPEED: number = 7;
+  public static readonly MOVE_SPEED: number = 10;
 
   private cube: THREE.Mesh;
   private boundaries: Boundaries;

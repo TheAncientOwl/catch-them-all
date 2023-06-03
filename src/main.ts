@@ -4,4 +4,4 @@ import Game from './Game';
 
 const game = new Game();
 
-game.run();
+game.runGameLoop();

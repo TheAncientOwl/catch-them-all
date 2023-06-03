@@ -6,13 +6,13 @@ export default class SceneRenderer extends THREE.Scene {
   private renderer: THREE.Renderer;
   private orbitals: OrbitControls;
 
-  render() {
+  public render() {
     this.camera.updateProjectionMatrix();
     this.renderer.render(this, this.camera);
     this.orbitals.update();
   }
 
-  constructor(withGridHelper: boolean = true) {
+  public constructor(withGridHelper: boolean = true) {
     super();
 
     this.camera = this.createCamera();

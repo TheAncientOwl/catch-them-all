@@ -7,14 +7,14 @@ export default class LightingManager {
   lightCount: number;
   lightDistance: number;
 
-  constructor(lightCount: number, lightDistance: number) {
+  public constructor(lightCount: number, lightDistance: number) {
     this.lightCount = lightCount;
     this.lightDistance = lightDistance;
     this.lights = [];
     this.lightsHelpers = [];
   }
 
-  createLighting() {
+  public createLighting() {
     for (let i = 0; i < this.lightCount; i++) {
       // Positions evenly in a circle pointed at the origin
       const light = new THREE.PointLight(0xffffff, 1);
@@ -28,7 +28,7 @@ export default class LightingManager {
     }
   }
 
-  addToSceneRenderer(sceneRenderer: SceneRenderer, helpers: boolean = true) {
+  public addToSceneRenderer(sceneRenderer: SceneRenderer, helpers: boolean = true) {
     for (let light of this.lights) {
       sceneRenderer.add(light);
 
@@ -40,7 +40,7 @@ export default class LightingManager {
     }
   }
 
-  removeFromSceneRenderer(sceneRenderer: SceneRenderer) {
+  public removeFromSceneRenderer(sceneRenderer: SceneRenderer) {
     for (let light of this.lights) {
       sceneRenderer.remove(light);
     }

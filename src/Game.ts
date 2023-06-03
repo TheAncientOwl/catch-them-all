@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 
-import SceneRenderer from './SceneRenderer';
-import LightingManager from './LightingManager';
-import Player from './Player';
-import InputManager from './InputManager';
-import Timer from './Timer';
-import Ground from './Ground';
-import FallingFruit from './FallingFruit';
+import SceneRenderer from './managers/SceneRenderer';
+import LightingManager from './managers/LightingManager';
+import Player from './objects/Player';
+import InputManager from './managers/InputManager';
+import Timer from './utilities/Timer';
+import Ground from './objects/Ground';
+import FallingFruit from './objects/FallingFruit';
 
 export default class Game {
   private sceneRenderer: SceneRenderer;

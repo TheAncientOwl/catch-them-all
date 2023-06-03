@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import InputManager, { InputKey } from './InputManager';
+import InputManager, { InputKey } from '../managers/InputManager';
 import Ground from './Ground';
 
 type Boundaries = {

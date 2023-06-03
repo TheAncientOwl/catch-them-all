@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import CollisionManager from './CollisionManager';
+import CollisionManager from '../managers/CollisionManager';
 
 export default class FallingFruit {
   public static readonly SPEED: number = 2.5;

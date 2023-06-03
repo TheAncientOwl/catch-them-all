@@ -16,7 +16,7 @@ export default class Game {
   public constructor() {
     this.sceneRenderer = new SceneRenderer();
 
-    this.lightingManager = new LightingManager(6, 3);
+    this.lightingManager = new LightingManager();
     this.lightingManager.createLighting();
     this.lightingManager.addToSceneRenderer(this.sceneRenderer);
 

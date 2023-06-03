@@ -1,16 +1,12 @@
 import './style.css';
 
-import BasicScene from './BasicScene';
+import SceneRenderer from './SceneRenderer';
 
-// sets up the scene
-let scene = new BasicScene(true);
+let scene = new SceneRenderer(true);
 
 // loops updates
-function loop() {
-  scene.camera.updateProjectionMatrix();
-  scene.renderer.render(scene, scene.camera);
-  scene.orbitals.update();
+(function loop() {
+  scene.render();
+
   requestAnimationFrame(loop);
-}
-// runs a continuous loop
-loop();
+})();

@@ -25,9 +25,9 @@ export default class SceneRenderer extends THREE.Scene {
 
   private createCamera(): THREE.PerspectiveCamera {
     const newCamera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
-    newCamera.position.z = 12;
-    newCamera.position.y = 12;
-    newCamera.position.x = 12;
+    newCamera.position.z = 20;
+    newCamera.position.y = 7;
+    newCamera.position.x = 3;
 
     return newCamera;
   }

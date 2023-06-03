@@ -5,9 +5,6 @@ export default class SceneRenderer extends THREE.Scene {
   private camera: THREE.PerspectiveCamera;
   private renderer: THREE.Renderer;
   private orbitals: OrbitControls;
-  private lights: Array<THREE.Light> = [];
-  private lightCount: number = 6;
-  private lightDistance: number = 3;
 
   render() {
     this.camera.updateProjectionMatrix();
@@ -24,7 +21,6 @@ export default class SceneRenderer extends THREE.Scene {
     this.background = new THREE.Color(0xefefef);
 
     this.addWindowResizing(this.camera, this.renderer);
-    this.addLights();
 
     if (withGridHelper) this.addGridHelper();
 
@@ -38,24 +34,6 @@ export default class SceneRenderer extends THREE.Scene {
     cube.position.y = 0.5;
 
     return cube;
-  }
-
-  private addLights() {
-    for (let i = 0; i < this.lightCount; i++) {
-      // Positions evenly in a circle pointed at the origin
-      const light = new THREE.PointLight(0xffffff, 1);
-      let lightX = this.lightDistance * Math.sin(((Math.PI * 2) / this.lightCount) * i);
-      let lightZ = this.lightDistance * Math.cos(((Math.PI * 2) / this.lightCount) * i);
-
-      // Create a light
-      light.position.set(lightX, this.lightDistance, lightZ);
-      light.lookAt(0, 0, 0);
-      this.add(light);
-      this.lights.push(light);
-
-      // Visual helpers to indicate light positions
-      this.add(new THREE.PointLightHelper(light, 0.5, 0xff9900));
-    }
   }
 
   private addGridHelper() {
@@ -85,7 +63,6 @@ export default class SceneRenderer extends THREE.Scene {
   private addWindowResizing(camera: THREE.PerspectiveCamera, renderer: THREE.Renderer) {
     window.addEventListener('resize', onWindowResize, false);
     function onWindowResize() {
-      // uses the global window widths and height
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);

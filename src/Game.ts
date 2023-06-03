@@ -42,7 +42,7 @@ export default class Game {
     const deltaTime = this.timer.calculateDeltaTime();
 
     this.player.update(this.inputManager, deltaTime);
-    this.fruit.update(deltaTime);
+    this.fruit.update(deltaTime, this.player.getObject3D() as THREE.Mesh);
     this.sceneRenderer.render();
 
     requestAnimationFrame(() => this.runGameLoop());

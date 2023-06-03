@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import CollisionManager from './CollisionManager';
 
 export default class FallingFruit {
   public static readonly SPEED: number = 2.5;
@@ -20,15 +21,15 @@ export default class FallingFruit {
     return this.cube;
   }
 
-  public update(deltaTime: number): void {
+  public update(deltaTime: number, player: THREE.Mesh): void {
     this.cube.position.y -= FallingFruit.SPEED * deltaTime;
 
-    if (this.cube.position.y < 0) {
-      this.resetPosition();
+    if (this.cube.position.y < 0 || CollisionManager.collide(this.cube, player)) {
+      this.randomizePosition();
     }
   }
 
-  private resetPosition(): void {
+  private randomizePosition(): void {
     this.cube.position.copy(this.initialPosition);
   }
 }

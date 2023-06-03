@@ -6,6 +6,10 @@ import Timer from './Timer';
 import Ground from './Ground';
 
 export default class Game {
+  private static PLAYER_MOVE_SPEED: number = 7;
+  private static GROUND_WIDTH: number = 15;
+  private static GROUND_HEIGHT: number = 6;
+
   private sceneRenderer: SceneRenderer;
   private lightingManager: LightingManager;
   private inputManager: InputManager;
@@ -23,11 +27,11 @@ export default class Game {
     this.inputManager = new InputManager();
     this.timer = new Timer();
 
+    this.ground = new Ground();
+    this.sceneRenderer.add(this.ground.getObject3D());
+
     this.player = new Player();
     this.sceneRenderer.add(this.player.getObject3D());
-
-    this.ground = new Ground(15, 6);
-    this.sceneRenderer.add(this.ground.getObject3D());
   }
 
   public runGameLoop() {

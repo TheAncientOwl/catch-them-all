@@ -2,27 +2,26 @@ import * as THREE from 'three';
 import SceneRenderer from './SceneRenderer';
 
 export default class LightingManager {
-  lights: Array<THREE.PointLight>;
-  lightsHelpers: Array<THREE.PointLightHelper>;
-  lightCount: number;
-  lightDistance: number;
+  public static readonly LIGHT_COUNT: number = 10;
+  public static readonly LIGHT_DISTANCE: number = 5;
 
-  public constructor(lightCount: number, lightDistance: number) {
-    this.lightCount = lightCount;
-    this.lightDistance = lightDistance;
+  private lights: Array<THREE.PointLight>;
+  private lightsHelpers: Array<THREE.PointLightHelper>;
+
+  public constructor() {
     this.lights = [];
     this.lightsHelpers = [];
   }
 
   public createLighting() {
-    for (let i = 0; i < this.lightCount; i++) {
+    for (let i = 0; i < LightingManager.LIGHT_COUNT; i++) {
       // Positions evenly in a circle pointed at the origin
       const light = new THREE.PointLight(0xffffff, 1);
-      let lightX = this.lightDistance * Math.sin(((Math.PI * 2) / this.lightCount) * i);
-      let lightZ = this.lightDistance * Math.cos(((Math.PI * 2) / this.lightCount) * i);
+      let lightX = LightingManager.LIGHT_DISTANCE * Math.sin(((Math.PI * 2) / LightingManager.LIGHT_COUNT) * i);
+      let lightZ = LightingManager.LIGHT_DISTANCE * Math.cos(((Math.PI * 2) / LightingManager.LIGHT_COUNT) * i);
 
       // Create a light
-      light.position.set(lightX, this.lightDistance, lightZ);
+      light.position.set(lightX, LightingManager.LIGHT_DISTANCE, lightZ);
       light.lookAt(0, 0, 0);
       this.lights.push(light);
     }

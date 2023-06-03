@@ -12,7 +12,7 @@ export default class SceneRenderer extends THREE.Scene {
     this.orbitals.update();
   }
 
-  public constructor(withGridHelper: boolean = true) {
+  public constructor() {
     super();
 
     this.camera = this.createCamera();
@@ -21,13 +21,6 @@ export default class SceneRenderer extends THREE.Scene {
     this.background = new THREE.Color(0x1c1c1c);
 
     this.addWindowResizing(this.camera, this.renderer);
-
-    if (withGridHelper) this.addGridHelper();
-  }
-
-  private addGridHelper() {
-    this.add(new THREE.GridHelper(10, 10, 'red'));
-    this.add(new THREE.AxesHelper(3));
   }
 
   private createCamera(): THREE.PerspectiveCamera {

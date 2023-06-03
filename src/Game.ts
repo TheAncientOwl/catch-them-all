@@ -3,6 +3,7 @@ import LightingManager from './LightingManager';
 import Player from './Player';
 import InputManager from './InputManager';
 import Timer from './Timer';
+import Ground from './Ground';
 
 export default class Game {
   private sceneRenderer: SceneRenderer;
@@ -10,9 +11,10 @@ export default class Game {
   private inputManager: InputManager;
   private timer: Timer;
   private player: Player;
+  private ground: Ground;
 
   public constructor() {
-    this.sceneRenderer = new SceneRenderer(true);
+    this.sceneRenderer = new SceneRenderer();
 
     this.lightingManager = new LightingManager(6, 3);
     this.lightingManager.createLighting();
@@ -23,6 +25,9 @@ export default class Game {
 
     this.player = new Player();
     this.sceneRenderer.add(this.player.getObject3D());
+
+    this.ground = new Ground(15, 6);
+    this.sceneRenderer.add(this.ground.getObject3D());
   }
 
   public runGameLoop() {

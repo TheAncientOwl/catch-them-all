@@ -23,17 +23,6 @@ export default class SceneRenderer extends THREE.Scene {
     this.addWindowResizing(this.camera, this.renderer);
 
     if (withGridHelper) this.addGridHelper();
-
-    this.add(this.createCube());
-  }
-
-  private createCube(): THREE.Mesh {
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshPhongMaterial({ color: 0xff9900 });
-    let cube = new THREE.Mesh(geometry, material);
-    cube.position.y = 0.5;
-
-    return cube;
   }
 
   private addGridHelper() {

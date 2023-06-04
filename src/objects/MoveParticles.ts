@@ -74,7 +74,6 @@ export default class MoveParticles {
 
   public update(playerPositionX: number) {
     const xDelta = this.previousPlayerPositionX - playerPositionX;
-    console.log(xDelta);
     this.previousPlayerPositionX = playerPositionX;
 
     const positions = this.particles.geometry.attributes.position;

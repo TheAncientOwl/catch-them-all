@@ -4,6 +4,8 @@ canvas {
   margin: 0;
   padding: 0;
   border: 0;
+
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 canvas {
@@ -69,4 +71,15 @@ canvas {
 
 .theme-dropdown-menu li > a {
   text-decoration: none;
+}
+
+/* fps */
+.fps-counter {
+  position: fixed;
+  top: 4vh;
+  right: 4vw;
+
+  font-size: 1rem;
+  color: yellow;
+  font-style: oblique;
 }

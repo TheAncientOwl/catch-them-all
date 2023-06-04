@@ -52,11 +52,10 @@ export default class Player {
     if (inputManager.isKeyPressed(InputKey.ArrowLeft)) {
       this.body.position.x = Math.max(this.body.position.x - movementSpeed, this.boundaries.min);
       particleReferencePoint.x += MoveParticles.MOVE_OFFSET;
-      this.moveParticles.update(particleReferencePoint);
     } else if (inputManager.isKeyPressed(InputKey.ArrowRight)) {
       this.body.position.x = Math.min(this.body.position.x + movementSpeed, this.boundaries.max);
       particleReferencePoint.x -= MoveParticles.MOVE_OFFSET;
-      this.moveParticles.update(particleReferencePoint);
     }
+    this.moveParticles.update(particleReferencePoint, deltaTime);
   }
 }

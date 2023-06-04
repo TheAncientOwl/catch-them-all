@@ -11,14 +11,18 @@ export default class MoveParticles {
   public static readonly OFFSET_Y: number = 0.5;
   public static readonly OFFSET_Z: number = 0.7;
   public static readonly MOVE_OFFSET: number = 0.8;
+  public static readonly RECALCULATE_HEIGHT_OFFSETS_TIME: number = 0.19;
 
   private geometry: THREE.BufferGeometry;
   private particles: THREE.Points;
 
-  private offsets: Array<THREE.Vector3>;
+  private randomOffsets: Array<THREE.Vector3>;
+  private heightOffsetTimer: number;
 
   public constructor(playerPosition: THREE.Vector3) {
-    this.offsets = this.createOffsets();
+    this.heightOffsetTimer = 0;
+
+    this.randomOffsets = this.createRandomOffsets();
     this.geometry = this.createGeometry();
 
     this.particles = new THREE.Points(this.geometry, this.createShaderMaterial());
@@ -30,8 +34,22 @@ export default class MoveParticles {
     return this.particles;
   }
 
-  public update(playerPosition: THREE.Vector3) {
+  public update(playerPosition: THREE.Vector3, deltaTime: number) {
+    this.recalculateHeightOffsets(deltaTime);
+
     this.centerParticlesAround(playerPosition);
+  }
+
+  private recalculateHeightOffsets(deltaTime: number) {
+    this.heightOffsetTimer += deltaTime;
+
+    if (this.heightOffsetTimer > MoveParticles.RECALCULATE_HEIGHT_OFFSETS_TIME) {
+      this.heightOffsetTimer -= MoveParticles.RECALCULATE_HEIGHT_OFFSETS_TIME;
+
+      for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
+        this.randomOffsets[i].y = Random.randBetween(0.3, MoveParticles.OFFSET_Y);
+      }
+    }
   }
 
   private createGeometry(): THREE.BufferGeometry {
@@ -74,7 +92,7 @@ export default class MoveParticles {
     return material;
   }
 
-  private createOffsets(): Array<THREE.Vector3> {
+  private createRandomOffsets(): Array<THREE.Vector3> {
     const offsets: Array<THREE.Vector3> = [];
 
     for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
@@ -94,14 +112,9 @@ export default class MoveParticles {
     const positions = this.particles.geometry.attributes.position;
 
     for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
-      const { x, y, z } = this.offsets[i];
+      const { x, y, z } = this.randomOffsets[i];
 
-      positions.setXYZ(
-        i,
-        position.x + x,
-        THREE.MathUtils.clamp(position.y - y, Constants.GROUND_LEVEL, 10),
-        position.z + z
-      );
+      positions.setXYZ(i, position.x + x, Math.max(position.y - y, Constants.GROUND_LEVEL), position.z + z);
     }
 
     positions.needsUpdate = true;

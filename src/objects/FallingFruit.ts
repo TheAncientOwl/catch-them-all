@@ -16,7 +16,7 @@ export default class FallingFruit {
   public constructor() {
     this.speed = Random.randBetween(FallingFruit.MIN_SPEED, FallingFruit.MAX_SPEED);
 
-    const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+    const geometry = new THREE.SphereGeometry(0.3, 32, 32);
     const material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().fruit });
 
     this.body = new THREE.Mesh(geometry, material);

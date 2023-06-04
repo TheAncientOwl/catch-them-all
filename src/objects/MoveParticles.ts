@@ -15,40 +15,9 @@ export default class MoveParticles {
 
   public constructor(playerPosition: THREE.Vector3) {
     this.offsets = this.createOffsets();
+    this.geometry = this.createGeometry();
 
-    const positions = new Float32Array(MoveParticles.PARTICLE_COUNT * 3);
-    const colors: number[] = [];
-    const sizes: number[] = [];
-
-    const color = new THREE.Color(0xffffff);
-
-    for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
-      color.setHSL(1.0 * (i / MoveParticles.PARTICLE_COUNT), 0.9, 0.5);
-      color.toArray(colors, i * 3);
-
-      sizes.push(25);
-    }
-
-    this.geometry = new THREE.BufferGeometry();
-    this.geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    this.geometry.setAttribute('customColor', new THREE.Float32BufferAttribute(colors, 3));
-    this.geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
-
-    const uniforms = {
-      color: { value: new THREE.Color(0xffffff) },
-      pointTexture: { value: new THREE.TextureLoader().load('../../assets/player_move_particle.png') },
-    };
-
-    const material = new THREE.ShaderMaterial({
-      uniforms,
-      vertexShader: this.getTextContentOrDefault(document.getElementById('vertexshader')),
-      fragmentShader: this.getTextContentOrDefault(document.getElementById('fragmentshader')),
-      blending: THREE.AdditiveBlending,
-      depthTest: false,
-      transparent: true,
-    });
-
-    this.particles = new THREE.Points(this.geometry, material);
+    this.particles = new THREE.Points(this.geometry, this.createShaderMaterial());
 
     this.centerParticlesAround(playerPosition);
   }
@@ -66,6 +35,46 @@ export default class MoveParticles {
     if (element.textContent === null) return def;
 
     return element.textContent;
+  }
+
+  private createGeometry(): THREE.BufferGeometry {
+    const positions = new Float32Array(MoveParticles.PARTICLE_COUNT * 3);
+    const colors: number[] = [];
+    const sizes: number[] = [];
+
+    const color = new THREE.Color(0xffffff);
+
+    for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
+      color.setHSL(1.0 * (i / MoveParticles.PARTICLE_COUNT), 0.9, 0.5);
+      color.toArray(colors, i * 3);
+
+      sizes.push(25);
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('customColor', new THREE.Float32BufferAttribute(colors, 3));
+    geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+
+    return geometry;
+  }
+
+  private createShaderMaterial(): THREE.ShaderMaterial {
+    const uniforms = {
+      color: { value: new THREE.Color(0xffffff) },
+      pointTexture: { value: new THREE.TextureLoader().load('../../assets/player_move_particle.png') },
+    };
+
+    const material = new THREE.ShaderMaterial({
+      uniforms,
+      vertexShader: this.getTextContentOrDefault(document.getElementById('vertexshader')),
+      fragmentShader: this.getTextContentOrDefault(document.getElementById('fragmentshader')),
+      blending: THREE.AdditiveBlending,
+      depthTest: false,
+      transparent: true,
+    });
+
+    return material;
   }
 
   private createOffsets(): Array<THREE.Vector3> {

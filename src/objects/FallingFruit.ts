@@ -7,8 +7,8 @@ import Constants from '../utilities/Constants';
 import ScoreManager from '../managers/Scoremanager';
 
 export default class FallingFruit {
-  private static readonly MIN_SPEED: number = 2.5;
-  private static readonly MAX_SPEED: number = 3.5;
+  private static readonly MIN_SPEED: number = 3;
+  private static readonly MAX_SPEED: number = 4;
 
   private body: THREE.Mesh;
   private speed: number;

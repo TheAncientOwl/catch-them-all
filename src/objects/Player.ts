@@ -13,7 +13,7 @@ type Boundaries = {
 export default class Player {
   private static readonly PARTICLE_COUNT: number = 40;
   private static readonly PARTICLES_OFFSET: number = 0.8;
-  private static readonly MOVE_SPEED: number = 10;
+  private static readonly MOVE_SPEED: number = 12;
 
   private body: THREE.Mesh;
   private boundaries: Boundaries;

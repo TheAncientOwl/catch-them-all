@@ -18,6 +18,10 @@ export default class FallingFruit {
     this.body = new THREE.Mesh(geometry, material);
 
     this.randomizePosition();
+
+    ThemeManager.onThemeChanged(() => {
+      this.body.material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().fruit });
+    });
   }
 
   public getObject3D(): THREE.Object3D {

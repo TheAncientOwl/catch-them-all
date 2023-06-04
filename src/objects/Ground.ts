@@ -16,6 +16,13 @@ export default class Ground {
     this.body.rotation.x = Math.PI * -0.5; // Rotate the ground to be horizontal
 
     this.body.position.y = Constants.GROUND_LEVEL;
+
+    ThemeManager.onThemeChanged(() => {
+      this.body.material = new THREE.MeshBasicMaterial({
+        color: ThemeManager.getTheme().ground,
+        side: THREE.DoubleSide,
+      });
+    });
   }
 
   public getObject3D(): THREE.Object3D {

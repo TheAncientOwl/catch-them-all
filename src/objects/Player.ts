@@ -30,6 +30,10 @@ export default class Player {
     };
 
     this.moveParticles = new MoveParticles(this.body.position);
+
+    ThemeManager.onThemeChanged(() => {
+      this.body.material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().player });
+    });
   }
 
   public getObject3D(): THREE.Object3D {

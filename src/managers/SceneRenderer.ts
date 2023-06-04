@@ -22,6 +22,10 @@ export default class SceneRenderer extends THREE.Scene {
     this.background = new THREE.Color(ThemeManager.getTheme().background);
 
     this.addWindowResizing(this.camera, this.renderer);
+
+    ThemeManager.onThemeChanged(() => {
+      this.background = new THREE.Color(ThemeManager.getTheme().background);
+    });
   }
 
   private createCamera(): THREE.PerspectiveCamera {

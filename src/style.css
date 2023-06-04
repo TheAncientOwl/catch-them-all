@@ -10,6 +10,7 @@ canvas {
   display: block;
 }
 
+/* score */
 .score {
   position: fixed;
   bottom: 4rem;
@@ -19,4 +20,37 @@ canvas {
   font-weight: 900;
   font-style: oblique;
   font-size: 2rem;
+}
+
+/* theme dropdown */
+.theme-dropdown {
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+}
+
+.theme-dropdown-toggle {
+  display: block;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.theme-dropdown-menu {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
+
+.theme-dropdown-menu li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.theme-dropdown-menu li:hover {
+  background-color: #f2f2f2;
 }

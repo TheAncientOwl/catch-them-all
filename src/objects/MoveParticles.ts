@@ -2,6 +2,9 @@ import * as THREE from 'three';
 import Random from '../utilities/Random';
 import Constants from '../utilities/Constants';
 
+import fragmentshader from '../shaders/fragmentshader.glsl';
+import vertexshader from '../shaders/vertexshader.glsl';
+
 export default class MoveParticles {
   public static readonly PARTICLE_COUNT: number = 40;
   public static readonly OFFSET_X: number = 1;
@@ -29,13 +32,6 @@ export default class MoveParticles {
 
   public update(playerPosition: THREE.Vector3) {
     this.centerParticlesAround(playerPosition);
-  }
-
-  private getTextContentOrDefault(element: HTMLElement | null, def: string = ''): string {
-    if (element === null) return def;
-    if (element.textContent === null) return def;
-
-    return element.textContent;
   }
 
   private createGeometry(): THREE.BufferGeometry {
@@ -68,8 +64,8 @@ export default class MoveParticles {
 
     const material = new THREE.ShaderMaterial({
       uniforms,
-      vertexShader: this.getTextContentOrDefault(document.getElementById('vertexshader')),
-      fragmentShader: this.getTextContentOrDefault(document.getElementById('fragmentshader')),
+      vertexShader: vertexshader,
+      fragmentShader: fragmentshader,
       blending: THREE.AdditiveBlending,
       depthTest: false,
       transparent: true,

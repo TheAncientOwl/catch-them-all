@@ -6,12 +6,11 @@ import fragmentshader from '../shaders/fragmentshader.glsl';
 import vertexshader from '../shaders/vertexshader.glsl';
 
 export default class MoveParticles {
-  public static readonly PARTICLE_COUNT: number = 40;
-  public static readonly OFFSET_X: number = 0.8;
-  public static readonly OFFSET_Y: number = 0.5;
-  public static readonly OFFSET_Z: number = 0.7;
-  public static readonly MOVE_OFFSET: number = 0.8;
-  public static readonly RECALCULATE_HEIGHT_OFFSETS_TIME: number = 0.19;
+  private static readonly PARTICLE_COUNT: number = 40;
+  private static readonly OFFSET_X: number = 0.8;
+  private static readonly OFFSET_Y: number = 0.5;
+  private static readonly OFFSET_Z: number = 0.7;
+  private static readonly RECALCULATE_HEIGHT_OFFSETS_TIME: number = 0.19;
 
   private geometry: THREE.BufferGeometry;
   private particles: THREE.Points;

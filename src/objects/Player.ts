@@ -11,7 +11,8 @@ type Boundaries = {
 };
 
 export default class Player {
-  public static readonly MOVE_SPEED: number = 10;
+  private static readonly PARTICLES_OFFSET: number = 0.8;
+  private static readonly MOVE_SPEED: number = 10;
 
   private body: THREE.Mesh;
   private boundaries: Boundaries;
@@ -51,10 +52,10 @@ export default class Player {
 
     if (inputManager.isKeyPressed(InputKey.ArrowLeft)) {
       this.body.position.x = Math.max(this.body.position.x - movementSpeed, this.boundaries.min);
-      particleReferencePoint.x += MoveParticles.MOVE_OFFSET;
+      particleReferencePoint.x += Player.PARTICLES_OFFSET;
     } else if (inputManager.isKeyPressed(InputKey.ArrowRight)) {
       this.body.position.x = Math.min(this.body.position.x + movementSpeed, this.boundaries.max);
-      particleReferencePoint.x -= MoveParticles.MOVE_OFFSET;
+      particleReferencePoint.x -= Player.PARTICLES_OFFSET;
     }
     this.moveParticles.update(particleReferencePoint, deltaTime);
   }

@@ -6,7 +6,6 @@ import Player from './objects/Player';
 import InputManager from './managers/InputManager';
 import Timer from './utilities/Timer';
 import Ground from './objects/Ground';
-import FallingFruit from './objects/FallingFruit';
 import FruitSpawner from './managers/FruitSpawner';
 
 export default class Game {
@@ -33,6 +32,7 @@ export default class Game {
 
     this.player = new Player();
     this.sceneRenderer.add(this.player.getObject3D());
+    this.sceneRenderer.add(this.player.getParticleObject3D());
 
     this.fruitSpawner = new FruitSpawner();
     for (let fruit of this.fruitSpawner.getFruitsObject3D()) {

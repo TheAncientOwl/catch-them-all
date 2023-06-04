@@ -3,6 +3,7 @@ import InputManager, { InputKey } from '../managers/InputManager';
 import Ground from './Ground';
 import ThemeManager from '../managers/ThemeManager';
 import Constants from '../utilities/Constants';
+import MoveParticles from './MoveParticles';
 
 type Boundaries = {
   max: number;
@@ -14,6 +15,7 @@ export default class Player {
 
   private cube: THREE.Mesh;
   private boundaries: Boundaries;
+  private moveParticles: MoveParticles;
 
   public constructor() {
     const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -26,10 +28,16 @@ export default class Player {
       max: Ground.WIDTH / 2 - 0.5,
       min: -(Ground.WIDTH / 2) + 0.5,
     };
+
+    this.moveParticles = new MoveParticles(this.cube.position);
   }
 
   public getObject3D(): THREE.Object3D {
     return this.cube;
+  }
+
+  public getParticleObject3D(): THREE.Object3D {
+    return this.moveParticles.getObject3D();
   }
 
   public update(inputManager: InputManager, deltaTime: number) {

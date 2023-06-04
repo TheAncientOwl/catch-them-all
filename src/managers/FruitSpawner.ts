@@ -4,7 +4,6 @@ import FallingFruit from '../objects/FallingFruit';
 import SceneRenderer from './SceneRenderer';
 
 export default class FruitSpawner {
-  // public static readonly FRUIT_COUNT: number = 6;
   private fruits: Array<FallingFruit>;
   private fruitCount: number;
 

@@ -75,17 +75,6 @@ canvas {
   text-decoration: none;
 }
 
-/* fps */
-.fps-counter {
-  position: fixed;
-  top: 4vh;
-  right: 4vw;
-
-  font-size: min(2vw, 2vh);
-  color: yellow;
-  font-style: oblique;
-}
-
 /* fruit count */
 .fruit-count {
   position: fixed;

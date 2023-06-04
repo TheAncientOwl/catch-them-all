@@ -7,14 +7,12 @@ import InputManager from './managers/InputManager';
 import Timer from './utilities/Timer';
 import Ground from './objects/Ground';
 import FruitSpawner from './managers/FruitSpawner';
-import FPSManager from './managers/FPSManager';
 import TimeManager from './managers/TimeManager';
 
 export default class Game {
   private sceneRenderer: SceneRenderer;
   private lightingManager: LightingManager;
   private inputManager: InputManager;
-  private fpsManager: FPSManager;
   private fruitSpawner: FruitSpawner;
   private timer: Timer;
   private player: Player;
@@ -29,7 +27,6 @@ export default class Game {
     this.lightingManager.createLighting();
     this.lightingManager.addToSceneRenderer(this.sceneRenderer);
 
-    this.fpsManager = new FPSManager();
     this.inputManager = new InputManager();
     this.timer = new Timer();
 
@@ -68,8 +65,6 @@ export default class Game {
         this.fruitSpawner.update(deltaTime, this.player.getObject3D() as THREE.Mesh);
       }
     }
-
-    this.fpsManager.update(deltaTime);
 
     this.sceneRenderer.render();
 

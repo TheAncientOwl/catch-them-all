@@ -25,13 +25,22 @@ canvas {
 /* theme dropdown */
 .theme-dropdown {
   position: fixed;
-  top: 2rem;
-  left: 2rem;
+  top: 1rem;
+  left: 1rem;
+  min-width: 10rem;
+  display: flex;
+  gap: 0.5em;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0.7em;
+  border-radius: 0.5em;
 }
 
 .theme-dropdown-toggle {
   display: block;
-  padding: 10px;
+  padding: 0.75em 1.5em;
+  border-radius: 0.5em;
   background-color: #f2f2f2;
   border: 1px solid #ccc;
   cursor: pointer;
@@ -40,6 +49,7 @@ canvas {
 .theme-dropdown-menu {
   display: none;
   list-style: none;
+  border-radius: 0.25em;
   padding: 0;
   margin: 0;
   background-color: #fff;
@@ -47,10 +57,16 @@ canvas {
 }
 
 .theme-dropdown-menu li {
-  padding: 10px;
+  padding: 0.7em 1.2em;
+  text-align: center;
+  min-width: 7em;
   cursor: pointer;
 }
 
 .theme-dropdown-menu li:hover {
   background-color: #f2f2f2;
+}
+
+.theme-dropdown-menu li > a {
+  text-decoration: none;
 }

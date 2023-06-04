@@ -19,6 +19,8 @@ export default class Game {
   private timer: Timer;
   private player: Player;
   private ground: Ground;
+  private paused: boolean;
+  private pauseHTMLElement: HTMLElement;
 
   public constructor() {
     this.sceneRenderer = new SceneRenderer();
@@ -44,9 +46,15 @@ export default class Game {
       this.sceneRenderer.add(fruit);
     }
 
+    this.paused = false;
+    this.pauseHTMLElement = document.getElementById('pause') as HTMLElement;
+    this.pauseHTMLElement.style.display = 'none';
+
     document.addEventListener('keydown', event => {
       if (event.key === 'r' || event.key === 'R') {
         this.reset();
+      } else if (event.key === 'p' || event.key === 'P') {
+        this.pause();
       }
     });
   }
@@ -54,9 +62,11 @@ export default class Game {
   public runGameLoop() {
     const deltaTime = this.timer.calculateDeltaTime();
 
-    if (TimeManager.update(deltaTime, () => this.reset())) {
-      this.player.update(this.inputManager, deltaTime);
-      this.fruitSpawner.update(deltaTime, this.player.getObject3D() as THREE.Mesh);
+    if (!this.paused) {
+      if (TimeManager.update(deltaTime, () => this.reset())) {
+        this.player.update(this.inputManager, deltaTime);
+        this.fruitSpawner.update(deltaTime, this.player.getObject3D() as THREE.Mesh);
+      }
     }
 
     this.fpsManager.update(deltaTime);
@@ -70,5 +80,15 @@ export default class Game {
     TimeManager.reset();
     this.player.reset();
     this.fruitSpawner.reset();
+  }
+
+  private pause() {
+    if (this.paused === true) {
+      this.paused = false;
+      this.pauseHTMLElement.style.display = 'none';
+    } else if (this.paused === false) {
+      this.paused = true;
+      this.pauseHTMLElement.style.display = 'block';
+    }
   }
 }

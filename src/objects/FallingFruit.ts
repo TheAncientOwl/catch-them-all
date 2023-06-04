@@ -7,11 +7,15 @@ import Constants from '../utilities/Constants';
 import ScoreManager from '../managers/Scoremanager';
 
 export default class FallingFruit {
-  public static readonly SPEED: number = 2.5;
+  private static readonly MIN_SPEED: number = 2.5;
+  private static readonly MAX_SPEED: number = 3.5;
 
   private body: THREE.Mesh;
+  private speed: number;
 
   public constructor() {
+    this.speed = Random.randBetween(FallingFruit.MIN_SPEED, FallingFruit.MAX_SPEED);
+
     const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
     const material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().fruit });
 
@@ -29,9 +33,10 @@ export default class FallingFruit {
   }
 
   public update(deltaTime: number, player: THREE.Mesh): void {
-    this.body.position.y -= FallingFruit.SPEED * deltaTime;
+    this.body.position.y -= this.speed * deltaTime;
 
     if (this.body.position.y < Constants.GROUND_LEVEL + 0.25) {
+      this.speed = Random.randBetween(FallingFruit.MIN_SPEED, FallingFruit.MAX_SPEED);
       this.randomizePosition();
     }
 

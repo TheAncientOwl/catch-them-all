@@ -10,10 +10,11 @@ export default class MoveParticles {
 
   private geometry: THREE.BufferGeometry;
   private particles: THREE.Points;
-  private previousPlayerPositionX: number;
+
+  private offsets: Array<THREE.Vector3>;
 
   public constructor(playerPosition: THREE.Vector3) {
-    this.previousPlayerPositionX = playerPosition.x;
+    this.offsets = this.createOffsets();
 
     const positions = new Float32Array(MoveParticles.PARTICLE_COUNT * 3);
     const colors: number[] = [];
@@ -22,17 +23,6 @@ export default class MoveParticles {
     const color = new THREE.Color(0xffffff);
 
     for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
-      const position = new THREE.Vector3(
-        playerPosition.x + Random.randBetween(-MoveParticles.OFFSET_X, MoveParticles.OFFSET_X),
-        THREE.MathUtils.clamp(
-          playerPosition.y - Random.randBetween(0.3, MoveParticles.OFFSET_Y),
-          Constants.GROUND_LEVEL,
-          10
-        ),
-        playerPosition.z + Random.randBetween(-MoveParticles.OFFSET_Z, MoveParticles.OFFSET_Z)
-      );
-      position.toArray(positions, i * 3);
-
       color.setHSL(1.0 * (i / MoveParticles.PARTICLE_COUNT), 0.9, 0.5);
       color.toArray(colors, i * 3);
 
@@ -59,6 +49,16 @@ export default class MoveParticles {
     });
 
     this.particles = new THREE.Points(this.geometry, material);
+
+    this.centerParticlesAround(playerPosition);
+  }
+
+  public getObject3D(): THREE.Object3D {
+    return this.particles;
+  }
+
+  public update(playerPosition: THREE.Vector3) {
+    this.centerParticlesAround(playerPosition);
   }
 
   private getTextContentOrDefault(element: HTMLElement | null, def: string = ''): string {
@@ -68,18 +68,36 @@ export default class MoveParticles {
     return element.textContent;
   }
 
-  public getObject3D(): THREE.Object3D {
-    return this.particles;
+  private createOffsets(): Array<THREE.Vector3> {
+    const offsets: Array<THREE.Vector3> = [];
+
+    for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
+      offsets.push(
+        new THREE.Vector3(
+          Random.randBetween(-MoveParticles.OFFSET_X, MoveParticles.OFFSET_X),
+          Random.randBetween(0.3, MoveParticles.OFFSET_Y),
+          Random.randBetween(-MoveParticles.OFFSET_Z, MoveParticles.OFFSET_Z)
+        )
+      );
+    }
+
+    return offsets;
   }
 
-  public update(playerPositionX: number) {
-    const xDelta = this.previousPlayerPositionX - playerPositionX;
-    this.previousPlayerPositionX = playerPositionX;
-
+  private centerParticlesAround(position: THREE.Vector3) {
     const positions = this.particles.geometry.attributes.position;
+
     for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
-      positions.setX(i, positions.getX(i) - xDelta);
+      const { x, y, z } = this.offsets[i];
+
+      positions.setXYZ(
+        i,
+        position.x + x,
+        THREE.MathUtils.clamp(position.y - y, Constants.GROUND_LEVEL, 10),
+        position.z + z
+      );
     }
+
     positions.needsUpdate = true;
   }
 }

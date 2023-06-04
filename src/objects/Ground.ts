@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import ThemeManager from '../managers/ThemeManager';
 
 export default class Ground {
   public static readonly WIDTH: number = 16;
@@ -8,7 +9,7 @@ export default class Ground {
 
   constructor() {
     const geometry = new THREE.PlaneGeometry(Ground.WIDTH, Ground.HEIGHT);
-    const material = new THREE.MeshBasicMaterial({ color: 0x808080, side: THREE.DoubleSide });
+    const material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().ground, side: THREE.DoubleSide });
 
     this.ground = new THREE.Mesh(geometry, material);
     this.ground.rotation.x = Math.PI * -0.5; // Rotate the ground to be horizontal

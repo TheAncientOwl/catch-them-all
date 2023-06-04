@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import ThemeManager from './ThemeManager';
 
 export default class SceneRenderer extends THREE.Scene {
   private camera: THREE.PerspectiveCamera;
@@ -18,7 +19,7 @@ export default class SceneRenderer extends THREE.Scene {
     this.camera = this.createCamera();
     this.renderer = this.createRenderer();
     this.orbitals = new OrbitControls(this.camera, this.renderer.domElement);
-    this.background = new THREE.Color(0x1c1c1c);
+    this.background = new THREE.Color(ThemeManager.getTheme().background);
 
     this.addWindowResizing(this.camera, this.renderer);
   }

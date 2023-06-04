@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import CollisionManager from '../managers/CollisionManager';
 import Random from '../utilities/Random';
 import Ground from './Ground';
+import ThemeManager from '../managers/ThemeManager';
 
 export default class FallingFruit {
   public static readonly SPEED: number = 2.5;
@@ -10,7 +11,7 @@ export default class FallingFruit {
 
   public constructor() {
     const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().fruit });
 
     this.cube = new THREE.Mesh(geometry, material);
 

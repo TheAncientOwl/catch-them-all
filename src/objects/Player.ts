@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import InputManager, { InputKey } from '../managers/InputManager';
 import Ground from './Ground';
+import ThemeManager from '../managers/ThemeManager';
 
 type Boundaries = {
   max: number;
@@ -15,7 +16,7 @@ export default class Player {
 
   public constructor() {
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0x006600 });
+    const material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().player });
 
     this.cube = new THREE.Mesh(geometry, material);
     this.cube.position.y = 0.5;

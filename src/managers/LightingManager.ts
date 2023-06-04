@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import SceneRenderer from './SceneRenderer';
+import ThemeManager from './ThemeManager';
 
 export default class LightingManager {
   public static readonly LIGHT_COUNT: number = 10;
@@ -32,7 +33,7 @@ export default class LightingManager {
       sceneRenderer.add(light);
 
       if (helpers) {
-        const lightHelper = new THREE.PointLightHelper(light, 0.5, 0xff9900);
+        const lightHelper = new THREE.PointLightHelper(light, 0.5, ThemeManager.getTheme().light);
         this.lightsHelpers.push(lightHelper);
         sceneRenderer.add(lightHelper);
       }

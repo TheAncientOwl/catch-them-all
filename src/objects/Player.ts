@@ -17,7 +17,7 @@ export default class Player {
 
   private body: THREE.Mesh;
   private boundaries: Boundaries;
-  private moveParticles: RainbowParticles;
+  private rainbowParticles: RainbowParticles;
 
   public constructor() {
     const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -31,7 +31,7 @@ export default class Player {
       min: -(Ground.WIDTH / 2) + 0.5,
     };
 
-    this.moveParticles = new RainbowParticles(this.body.position, Player.PARTICLE_COUNT);
+    this.rainbowParticles = new RainbowParticles(this.body.position, Player.PARTICLE_COUNT);
 
     ThemeManager.onThemeChanged(() => {
       this.body.material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().player });
@@ -43,7 +43,7 @@ export default class Player {
   }
 
   public getParticleObject3D(): THREE.Object3D {
-    return this.moveParticles.getObject3D();
+    return this.rainbowParticles.getObject3D();
   }
 
   public update(inputManager: InputManager, deltaTime: number) {
@@ -58,6 +58,6 @@ export default class Player {
       this.body.position.x = Math.min(this.body.position.x + movementSpeed, this.boundaries.max);
       particleReferencePoint.x -= Player.PARTICLES_OFFSET;
     }
-    this.moveParticles.update(particleReferencePoint, deltaTime);
+    this.rainbowParticles.update(particleReferencePoint, deltaTime);
   }
 }

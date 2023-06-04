@@ -21,11 +21,12 @@ canvas {
   color: yellow;
   font-weight: 900;
   font-style: oblique;
-  font-size: 2rem;
+  font-size: min(4vw, 4vh);
 }
 
 /* theme dropdown */
 .theme-dropdown {
+  font-size: min(2vw, 2vh);
   position: fixed;
   top: 1rem;
   left: 1rem;
@@ -46,6 +47,7 @@ canvas {
   background-color: #f2f2f2;
   border: 1px solid #ccc;
   cursor: pointer;
+  font-size: min(2vw, 2vh);
 }
 
 .theme-dropdown-menu {
@@ -79,7 +81,7 @@ canvas {
   top: 4vh;
   right: 4vw;
 
-  font-size: 1rem;
+  font-size: min(2vw, 2vh);
   color: yellow;
   font-style: oblique;
 }

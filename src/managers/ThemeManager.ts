@@ -4,6 +4,15 @@ export default class ThemeManager {
   private static currentTheme: Theme;
   private static readonly themes: ReadonlyArray<Theme> = [
     {
+      name: 'Cosmic',
+      scoreColor: '#F28066',
+      background: '#150326',
+      ground: '#5114A6',
+      player: '#2B0B59',
+      fruit: '#F2A25C',
+      light: '#F28066',
+    },
+    {
       name: 'Green',
       scoreColor: 'yellow',
       background: '#014040',
@@ -39,15 +48,7 @@ export default class ThemeManager {
       fruit: '#F277A4',
       light: '#B3ECF2',
     },
-    {
-      name: 'Cosmic',
-      scoreColor: '#F28066',
-      background: '#150326',
-      ground: '#5114A6',
-      player: '#2B0B59',
-      fruit: '#F2A25C',
-      light: '#F28066',
-    },
+
     {
       name: 'Mono',
       scoreColor: '#F2F2F2',

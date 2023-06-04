@@ -9,3 +9,14 @@ canvas {
 canvas {
   display: block;
 }
+
+.score {
+  position: fixed;
+  bottom: 4rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: yellow;
+  font-weight: 900;
+  font-style: oblique;
+  font-size: 2rem;
+}

@@ -4,6 +4,7 @@ import Random from '../utilities/Random';
 import Ground from './Ground';
 import ThemeManager from '../managers/ThemeManager';
 import Constants from '../utilities/Constants';
+import ScoreManager from '../managers/Scoremanager';
 
 export default class FallingFruit {
   public static readonly SPEED: number = 2.5;
@@ -26,7 +27,12 @@ export default class FallingFruit {
   public update(deltaTime: number, player: THREE.Mesh): void {
     this.body.position.y -= FallingFruit.SPEED * deltaTime;
 
-    if (this.body.position.y < Constants.GROUND_LEVEL + 0.25 || CollisionManager.collide(this.body, player)) {
+    if (this.body.position.y < Constants.GROUND_LEVEL + 0.25) {
+      this.randomizePosition();
+    }
+
+    if (CollisionManager.collide(this.body, player)) {
+      ScoreManager.increase();
       this.randomizePosition();
     }
   }

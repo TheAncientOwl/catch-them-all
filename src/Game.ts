@@ -59,11 +59,9 @@ export default class Game {
   public runGameLoop() {
     const deltaTime = this.timer.calculateDeltaTime();
 
-    if (!this.paused) {
-      if (TimeManager.update(deltaTime, () => this.reset())) {
-        this.player.update(this.inputManager, deltaTime);
-        this.fruitSpawner.update(deltaTime, this.player.getObject3D() as THREE.Mesh);
-      }
+    if (!this.paused && TimeManager.update(deltaTime, () => this.reset())) {
+      this.player.update(this.inputManager, deltaTime);
+      this.fruitSpawner.update(deltaTime, this.player.getObject3D() as THREE.Mesh);
     }
 
     this.sceneRenderer.render();

@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import InputManager, { InputKey } from '../managers/InputManager';
 import Ground from './Ground';
 import ThemeManager from '../managers/ThemeManager';
+import Constants from '../utilities/Constants';
 
 type Boundaries = {
   max: number;
@@ -19,7 +20,7 @@ export default class Player {
     const material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().player });
 
     this.cube = new THREE.Mesh(geometry, material);
-    this.cube.position.y = 0.5;
+    this.cube.position.y = Constants.GROUND_LEVEL + 0.5;
 
     this.boundaries = {
       max: Ground.WIDTH / 2 - 0.5,

@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import ThemeManager from '../managers/ThemeManager';
+import Constants from '../utilities/Constants';
 
 export default class Ground {
   public static readonly WIDTH: number = 16;
@@ -13,6 +14,8 @@ export default class Ground {
 
     this.ground = new THREE.Mesh(geometry, material);
     this.ground.rotation.x = Math.PI * -0.5; // Rotate the ground to be horizontal
+
+    this.ground.position.y = Constants.GROUND_LEVEL;
   }
 
   public getObject3D(): THREE.Object3D {

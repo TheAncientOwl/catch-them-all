@@ -4,7 +4,7 @@ import ThemeManager from './ThemeManager';
 
 export default class LightingManager {
   public static readonly LIGHT_COUNT: number = 10;
-  public static readonly LIGHT_DISTANCE: number = 6;
+  public static readonly LIGHT_DISTANCE: number = 5;
 
   private lights: Array<THREE.PointLight>;
   private lightsHelpers: Array<THREE.PointLightHelper>;

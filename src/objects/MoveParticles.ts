@@ -26,7 +26,7 @@ export default class MoveParticles {
 
     this.particles = new THREE.Points(this.geometry, this.createShaderMaterial());
 
-    this.centerParticlesAround(playerPosition);
+    this.centerParticlesAround(playerPosition, 0);
   }
 
   public getObject3D(): THREE.Object3D {
@@ -36,7 +36,7 @@ export default class MoveParticles {
   public update(playerPosition: THREE.Vector3, deltaTime: number) {
     this.recalculateHeightOffsets(deltaTime);
 
-    this.centerParticlesAround(playerPosition);
+    this.centerParticlesAround(playerPosition, deltaTime);
   }
 
   private recalculateHeightOffsets(deltaTime: number) {
@@ -107,13 +107,21 @@ export default class MoveParticles {
     return offsets;
   }
 
-  private centerParticlesAround(position: THREE.Vector3) {
+  private centerParticlesAround(position: THREE.Vector3, deltaTime: number) {
     const positions = this.particles.geometry.attributes.position;
 
     for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
       const { x, y, z } = this.randomOffsets[i];
 
-      positions.setXYZ(i, position.x + x, Math.max(position.y - y, Constants.GROUND_LEVEL), position.z + z);
+      positions.setXYZ(
+        i,
+        position.x + x,
+        Math.max(
+          position.y - y - (Random.randBetween(0, 10) >= 5 ? -1 : 1) * Random.randBetween(0.25, 0.35) * deltaTime,
+          Constants.GROUND_LEVEL
+        ),
+        position.z + z
+      );
     }
 
     positions.needsUpdate = true;

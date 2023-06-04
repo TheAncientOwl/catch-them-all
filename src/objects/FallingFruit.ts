@@ -8,25 +8,25 @@ import Constants from '../utilities/Constants';
 export default class FallingFruit {
   public static readonly SPEED: number = 2.5;
 
-  private cube: THREE.Mesh;
+  private body: THREE.Mesh;
 
   public constructor() {
     const geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
     const material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().fruit });
 
-    this.cube = new THREE.Mesh(geometry, material);
+    this.body = new THREE.Mesh(geometry, material);
 
     this.randomizePosition();
   }
 
   public getObject3D(): THREE.Object3D {
-    return this.cube;
+    return this.body;
   }
 
   public update(deltaTime: number, player: THREE.Mesh): void {
-    this.cube.position.y -= FallingFruit.SPEED * deltaTime;
+    this.body.position.y -= FallingFruit.SPEED * deltaTime;
 
-    if (this.cube.position.y < Constants.GROUND_LEVEL + 0.25 || CollisionManager.collide(this.cube, player)) {
+    if (this.body.position.y < Constants.GROUND_LEVEL + 0.25 || CollisionManager.collide(this.body, player)) {
       this.randomizePosition();
     }
   }
@@ -38,6 +38,6 @@ export default class FallingFruit {
       0
     );
 
-    this.cube.position.copy(randomPosition);
+    this.body.position.copy(randomPosition);
   }
 }

@@ -13,7 +13,7 @@ type Boundaries = {
 export default class Player {
   public static readonly MOVE_SPEED: number = 10;
 
-  private cube: THREE.Mesh;
+  private body: THREE.Mesh;
   private boundaries: Boundaries;
   private moveParticles: MoveParticles;
 
@@ -21,19 +21,19 @@ export default class Player {
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().player });
 
-    this.cube = new THREE.Mesh(geometry, material);
-    this.cube.position.y = Constants.GROUND_LEVEL + 0.5;
+    this.body = new THREE.Mesh(geometry, material);
+    this.body.position.y = Constants.GROUND_LEVEL + 0.5;
 
     this.boundaries = {
       max: Ground.WIDTH / 2 - 0.5,
       min: -(Ground.WIDTH / 2) + 0.5,
     };
 
-    this.moveParticles = new MoveParticles(this.cube.position);
+    this.moveParticles = new MoveParticles(this.body.position);
   }
 
   public getObject3D(): THREE.Object3D {
-    return this.cube;
+    return this.body;
   }
 
   public getParticleObject3D(): THREE.Object3D {
@@ -44,9 +44,9 @@ export default class Player {
     const movementSpeed = Player.MOVE_SPEED * deltaTime;
 
     if (inputManager.isKeyPressed(InputKey.ArrowLeft)) {
-      this.cube.position.x = Math.max(this.cube.position.x - movementSpeed, this.boundaries.min);
+      this.body.position.x = Math.max(this.body.position.x - movementSpeed, this.boundaries.min);
     } else if (inputManager.isKeyPressed(InputKey.ArrowRight)) {
-      this.cube.position.x = Math.min(this.cube.position.x + movementSpeed, this.boundaries.max);
+      this.body.position.x = Math.min(this.body.position.x + movementSpeed, this.boundaries.max);
     }
   }
 }

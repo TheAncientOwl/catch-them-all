@@ -85,3 +85,12 @@ canvas {
   color: yellow;
   font-style: oblique;
 }
+
+/* fruit count */
+.fruit-count {
+  position: fixed;
+  bottom: 4vh;
+  left: 4vh;
+
+  color: white;
+}

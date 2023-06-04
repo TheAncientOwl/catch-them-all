@@ -38,6 +38,7 @@ export default class Game {
     this.sceneRenderer.add(this.player.getParticleObject3D());
 
     this.fruitSpawner = new FruitSpawner();
+    this.fruitSpawner.setupListener(this.sceneRenderer);
     for (let fruit of this.fruitSpawner.getFruitsObject3D()) {
       this.sceneRenderer.add(fruit);
     }

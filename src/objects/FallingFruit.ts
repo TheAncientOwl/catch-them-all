@@ -30,7 +30,11 @@ export default class FallingFruit {
   }
 
   private randomizePosition(): void {
-    const randomPosition = new THREE.Vector3(Random.randBetween(-Ground.WIDTH / 2, Ground.WIDTH / 2), 7, 0);
+    const randomPosition = new THREE.Vector3(
+      Random.randBetween(-Ground.WIDTH / 2, Ground.WIDTH / 2),
+      Random.randBetween(6, 9),
+      0
+    );
 
     this.cube.position.copy(randomPosition);
   }

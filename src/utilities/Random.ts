@@ -1,5 +1,5 @@
 export default class Random {
   public static randBetween(min: number, max: number): number {
-    return Math.random() * (max - min) + min;
+    return parseFloat((Math.random() * (max - min) + min).toFixed(4));
   }
 }

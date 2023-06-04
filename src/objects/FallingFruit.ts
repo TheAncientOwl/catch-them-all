@@ -55,4 +55,9 @@ export default class FallingFruit {
 
     this.body.position.copy(randomPosition);
   }
+
+  public reset() {
+    this.body.position.y = Random.randBetween(6, 9);
+    this.speed = Random.randBetween(FallingFruit.MIN_SPEED, FallingFruit.MAX_SPEED);
+  }
 }

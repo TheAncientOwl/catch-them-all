@@ -20,10 +20,6 @@ export default class TimeManager {
     ThemeManager.onThemeChanged(() => {
       TimeManager.timeHtmlElement!.style.color = ThemeManager.getTheme().scoreColor;
     });
-
-    document.getElementById('play-again-button')?.addEventListener('click', () => {
-      TimeManager.reset();
-    });
   }
 
   public static reset() {
@@ -32,12 +28,19 @@ export default class TimeManager {
     this.gameOverHtmlElement.style.display = 'none';
   }
 
-  public static update(deltaTime: number): boolean {
+  public static update(deltaTime: number, resetCallback: () => void = TimeManager.reset): boolean {
     TimeManager.time -= deltaTime;
 
     if (TimeManager.time > 0) {
       const timeLeft = TimeManager.time.toFixed(1);
       TimeManager.timeHtmlElement!.textContent = `Time left: ${timeLeft}s`;
+
+      const button = document.getElementById('play-again-button') as HTMLElement;
+      const handleReset = () => {
+        resetCallback();
+        button.removeEventListener('click', handleReset);
+      };
+      button.addEventListener('click', handleReset);
 
       return true;
     } else {

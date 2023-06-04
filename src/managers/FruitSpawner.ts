@@ -44,4 +44,10 @@ export default class FruitSpawner {
       fruit.update(deltaTime, player);
     }
   }
+
+  public reset() {
+    for (let fruit of this.fruits) {
+      fruit.reset();
+    }
+  }
 }

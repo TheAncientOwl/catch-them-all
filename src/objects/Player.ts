@@ -60,4 +60,9 @@ export default class Player {
     }
     this.rainbowParticles.update(particleReferencePoint, deltaTime);
   }
+
+  public reset() {
+    this.body.position.x = 0;
+    this.body.position.z = 0;
+  }
 }

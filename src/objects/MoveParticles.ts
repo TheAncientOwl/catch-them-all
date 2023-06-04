@@ -5,13 +5,16 @@ import Constants from '../utilities/Constants';
 export default class MoveParticles {
   public static readonly PARTICLE_COUNT: number = 40;
   public static readonly OFFSET_X: number = 1;
-  public static readonly OFFSET_Y: number = 0.2;
+  public static readonly OFFSET_Y: number = 0.45;
   public static readonly OFFSET_Z: number = 1;
 
   private geometry: THREE.BufferGeometry;
   private particles: THREE.Points;
+  private previousPlayerPositionX: number;
 
   public constructor(playerPosition: THREE.Vector3) {
+    this.previousPlayerPositionX = playerPosition.x;
+
     const positions = new Float32Array(MoveParticles.PARTICLE_COUNT * 3);
     const colors: number[] = [];
     const sizes: number[] = [];
@@ -22,7 +25,7 @@ export default class MoveParticles {
       const position = new THREE.Vector3(
         playerPosition.x + Random.randBetween(-MoveParticles.OFFSET_X, MoveParticles.OFFSET_X),
         THREE.MathUtils.clamp(
-          playerPosition.y - Random.randBetween(0, MoveParticles.OFFSET_Y),
+          playerPosition.y - Random.randBetween(0.3, MoveParticles.OFFSET_Y),
           Constants.GROUND_LEVEL,
           10
         ),
@@ -69,7 +72,15 @@ export default class MoveParticles {
     return this.particles;
   }
 
-  public update(playerPosition: THREE.Vector3) {
-    console.log(playerPosition);
+  public update(playerPositionX: number) {
+    const xDelta = this.previousPlayerPositionX - playerPositionX;
+    console.log(xDelta);
+    this.previousPlayerPositionX = playerPositionX;
+
+    const positions = this.particles.geometry.attributes.position;
+    for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
+      positions.setX(i, positions.getX(i) - xDelta);
+    }
+    positions.needsUpdate = true;
   }
 }

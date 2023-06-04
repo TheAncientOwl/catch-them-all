@@ -45,8 +45,10 @@ export default class Player {
 
     if (inputManager.isKeyPressed(InputKey.ArrowLeft)) {
       this.body.position.x = Math.max(this.body.position.x - movementSpeed, this.boundaries.min);
+      this.moveParticles.update(this.body.position.x);
     } else if (inputManager.isKeyPressed(InputKey.ArrowRight)) {
       this.body.position.x = Math.min(this.body.position.x + movementSpeed, this.boundaries.max);
+      this.moveParticles.update(this.body.position.x);
     }
   }
 }

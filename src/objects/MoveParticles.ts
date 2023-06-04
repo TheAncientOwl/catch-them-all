@@ -1,7 +1,12 @@
 import * as THREE from 'three';
+import Random from '../utilities/Random';
+import Constants from '../utilities/Constants';
 
 export default class MoveParticles {
-  public static readonly PARTICLE_COUNT: number = 15;
+  public static readonly PARTICLE_COUNT: number = 40;
+  public static readonly OFFSET_X: number = 1;
+  public static readonly OFFSET_Y: number = 0.2;
+  public static readonly OFFSET_Z: number = 1;
 
   private geometry: THREE.BufferGeometry;
   private particles: THREE.Points;
@@ -14,6 +19,17 @@ export default class MoveParticles {
     const color = new THREE.Color(0xffffff);
 
     for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
+      const position = new THREE.Vector3(
+        playerPosition.x + Random.randBetween(-MoveParticles.OFFSET_X, MoveParticles.OFFSET_X),
+        THREE.MathUtils.clamp(
+          playerPosition.y - Random.randBetween(0, MoveParticles.OFFSET_Y),
+          Constants.GROUND_LEVEL,
+          10
+        ),
+        playerPosition.z + Random.randBetween(-MoveParticles.OFFSET_Z, MoveParticles.OFFSET_Z)
+      );
+      position.toArray(positions, i * 3);
+
       color.setHSL(1.0 * (i / MoveParticles.PARTICLE_COUNT), 0.9, 0.5);
       color.toArray(colors, i * 3);
 

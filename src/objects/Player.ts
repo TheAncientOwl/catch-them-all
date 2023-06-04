@@ -43,12 +43,16 @@ export default class Player {
   public update(inputManager: InputManager, deltaTime: number) {
     const movementSpeed = Player.MOVE_SPEED * deltaTime;
 
+    const particleReferencePoint = new THREE.Vector3().copy(this.body.position);
+
     if (inputManager.isKeyPressed(InputKey.ArrowLeft)) {
       this.body.position.x = Math.max(this.body.position.x - movementSpeed, this.boundaries.min);
-      this.moveParticles.update(this.body.position);
+      particleReferencePoint.x += MoveParticles.MOVE_OFFSET;
+      this.moveParticles.update(particleReferencePoint);
     } else if (inputManager.isKeyPressed(InputKey.ArrowRight)) {
       this.body.position.x = Math.min(this.body.position.x + movementSpeed, this.boundaries.max);
-      this.moveParticles.update(this.body.position);
+      particleReferencePoint.x -= MoveParticles.MOVE_OFFSET;
+      this.moveParticles.update(particleReferencePoint);
     }
   }
 }

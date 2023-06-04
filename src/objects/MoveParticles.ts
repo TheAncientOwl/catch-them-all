@@ -7,6 +7,7 @@ export default class MoveParticles {
   public static readonly OFFSET_X: number = 1;
   public static readonly OFFSET_Y: number = 0.45;
   public static readonly OFFSET_Z: number = 1;
+  public static readonly MOVE_OFFSET: number = 0.5;
 
   private geometry: THREE.BufferGeometry;
   private particles: THREE.Points;

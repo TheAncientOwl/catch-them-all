@@ -8,6 +8,7 @@ import Timer from './utilities/Timer';
 import Ground from './objects/Ground';
 import FruitSpawner from './managers/FruitSpawner';
 import FPSManager from './managers/FPSManager';
+import TimeManager from './managers/TimeManager';
 
 export default class Game {
   private sceneRenderer: SceneRenderer;
@@ -47,9 +48,12 @@ export default class Game {
   public runGameLoop() {
     const deltaTime = this.timer.calculateDeltaTime();
 
+    if (TimeManager.update(deltaTime)) {
+      this.player.update(this.inputManager, deltaTime);
+      this.fruitSpawner.update(deltaTime, this.player.getObject3D() as THREE.Mesh);
+    }
+
     this.fpsManager.update(deltaTime);
-    this.player.update(this.inputManager, deltaTime);
-    this.fruitSpawner.update(deltaTime, this.player.getObject3D() as THREE.Mesh);
 
     this.sceneRenderer.render();
 

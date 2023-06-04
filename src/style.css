@@ -94,3 +94,34 @@ canvas {
 
   color: white;
 }
+
+/* time-left */
+.time-left {
+  position: fixed;
+  top: 2.5rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: yellow;
+  font-weight: 900;
+  font-style: oblique;
+  font-size: min(4vw, 4vh);
+}
+
+.game-over {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: yellow;
+  font-weight: 900;
+  font-style: oblique;
+  font-size: min(10vw, 10vh);
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.play-again-button {
+  padding: 1rem 2rem;
+  margin: 0 10em;
+  cursor: pointer;
+}

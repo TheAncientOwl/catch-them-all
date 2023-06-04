@@ -14,6 +14,11 @@ export default class ScoreManager {
     });
   }
 
+  public static reset() {
+    ScoreManager.score = 0;
+    ScoreManager.htmlElement!.textContent = `Score: ${ScoreManager.score}`;
+  }
+
   public static increase() {
     ScoreManager.score++;
     ScoreManager.htmlElement!.textContent = `Score: ${ScoreManager.score}`;

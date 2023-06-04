@@ -43,6 +43,12 @@ export default class Game {
     for (let fruit of this.fruitSpawner.getFruitsObject3D()) {
       this.sceneRenderer.add(fruit);
     }
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'r' || event.key === 'R') {
+        this.reset();
+      }
+    });
   }
 
   public runGameLoop() {

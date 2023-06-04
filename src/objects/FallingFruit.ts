@@ -4,7 +4,7 @@ import Random from '../utilities/Random';
 import Ground from './Ground';
 import ThemeManager from '../managers/ThemeManager';
 import Constants from '../utilities/Constants';
-import ScoreManager from '../managers/Scoremanager';
+import ScoreManager from '../managers/ScoreManager';
 
 export default class FallingFruit {
   private static readonly MIN_SPEED: number = 3;

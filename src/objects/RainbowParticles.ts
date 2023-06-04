@@ -5,12 +5,13 @@ import Constants from '../utilities/Constants';
 import fragmentshader from '../shaders/fragmentshader.glsl';
 import vertexshader from '../shaders/vertexshader.glsl';
 
-export default class MoveParticles {
-  private static readonly PARTICLE_COUNT: number = 40;
+export default class RainbowParticles {
   private static readonly OFFSET_X: number = 0.8;
   private static readonly OFFSET_Y: number = 0.5;
   private static readonly OFFSET_Z: number = 0.7;
   private static readonly RECALCULATE_HEIGHT_OFFSETS_TIME: number = 0.19;
+
+  private particleCount: number;
 
   private geometry: THREE.BufferGeometry;
   private particles: THREE.Points;
@@ -18,7 +19,8 @@ export default class MoveParticles {
   private randomOffsets: Array<THREE.Vector3>;
   private heightOffsetTimer: number;
 
-  public constructor(playerPosition: THREE.Vector3) {
+  public constructor(centerPosition: THREE.Vector3, particleCount: number) {
+    this.particleCount = particleCount;
     this.heightOffsetTimer = 0;
 
     this.randomOffsets = this.createRandomOffsets();
@@ -26,7 +28,7 @@ export default class MoveParticles {
 
     this.particles = new THREE.Points(this.geometry, this.createShaderMaterial());
 
-    this.centerParticlesAround(playerPosition, 0);
+    this.centerParticlesAround(centerPosition, 0);
   }
 
   public getObject3D(): THREE.Object3D {
@@ -42,24 +44,24 @@ export default class MoveParticles {
   private recalculateHeightOffsets(deltaTime: number) {
     this.heightOffsetTimer += deltaTime;
 
-    if (this.heightOffsetTimer > MoveParticles.RECALCULATE_HEIGHT_OFFSETS_TIME) {
-      this.heightOffsetTimer -= MoveParticles.RECALCULATE_HEIGHT_OFFSETS_TIME;
+    if (this.heightOffsetTimer > RainbowParticles.RECALCULATE_HEIGHT_OFFSETS_TIME) {
+      this.heightOffsetTimer -= RainbowParticles.RECALCULATE_HEIGHT_OFFSETS_TIME;
 
-      for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
-        this.randomOffsets[i].y = Random.randBetween(0.3, MoveParticles.OFFSET_Y);
+      for (let i = 0; i < this.particleCount; i++) {
+        this.randomOffsets[i].y = Random.randBetween(0.3, RainbowParticles.OFFSET_Y);
       }
     }
   }
 
   private createGeometry(): THREE.BufferGeometry {
-    const positions = new Float32Array(MoveParticles.PARTICLE_COUNT * 3);
+    const positions = new Float32Array(this.particleCount * 3);
     const colors: number[] = [];
     const sizes: number[] = [];
 
     const color = new THREE.Color(0xffffff);
 
-    for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
-      color.setHSL(1.0 * (i / MoveParticles.PARTICLE_COUNT), 0.9, 0.5);
+    for (let i = 0; i < this.particleCount; i++) {
+      color.setHSL(1.0 * (i / this.particleCount), 0.9, 0.5);
       color.toArray(colors, i * 3);
 
       sizes.push(25);
@@ -94,12 +96,12 @@ export default class MoveParticles {
   private createRandomOffsets(): Array<THREE.Vector3> {
     const offsets: Array<THREE.Vector3> = [];
 
-    for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
+    for (let i = 0; i < this.particleCount; i++) {
       offsets.push(
         new THREE.Vector3(
-          Random.randBetween(-MoveParticles.OFFSET_X, MoveParticles.OFFSET_X),
-          Random.randBetween(0.3, MoveParticles.OFFSET_Y),
-          Random.randBetween(-MoveParticles.OFFSET_Z, MoveParticles.OFFSET_Z)
+          Random.randBetween(-RainbowParticles.OFFSET_X, RainbowParticles.OFFSET_X),
+          Random.randBetween(0.3, RainbowParticles.OFFSET_Y),
+          Random.randBetween(-RainbowParticles.OFFSET_Z, RainbowParticles.OFFSET_Z)
         )
       );
     }
@@ -110,7 +112,7 @@ export default class MoveParticles {
   private centerParticlesAround(position: THREE.Vector3, deltaTime: number) {
     const positions = this.particles.geometry.attributes.position;
 
-    for (let i = 0; i < MoveParticles.PARTICLE_COUNT; i++) {
+    for (let i = 0; i < this.particleCount; i++) {
       const { x, y, z } = this.randomOffsets[i];
 
       positions.setXYZ(

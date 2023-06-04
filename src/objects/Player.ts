@@ -3,7 +3,7 @@ import InputManager, { InputKey } from '../managers/InputManager';
 import Ground from './Ground';
 import ThemeManager from '../managers/ThemeManager';
 import Constants from '../utilities/Constants';
-import MoveParticles from './MoveParticles';
+import RainbowParticles from './RainbowParticles';
 
 type Boundaries = {
   max: number;
@@ -11,12 +11,13 @@ type Boundaries = {
 };
 
 export default class Player {
+  private static readonly PARTICLE_COUNT: number = 40;
   private static readonly PARTICLES_OFFSET: number = 0.8;
   private static readonly MOVE_SPEED: number = 10;
 
   private body: THREE.Mesh;
   private boundaries: Boundaries;
-  private moveParticles: MoveParticles;
+  private moveParticles: RainbowParticles;
 
   public constructor() {
     const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -30,7 +31,7 @@ export default class Player {
       min: -(Ground.WIDTH / 2) + 0.5,
     };
 
-    this.moveParticles = new MoveParticles(this.body.position);
+    this.moveParticles = new RainbowParticles(this.body.position, Player.PARTICLE_COUNT);
 
     ThemeManager.onThemeChanged(() => {
       this.body.material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().player });

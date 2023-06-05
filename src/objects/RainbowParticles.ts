@@ -1,9 +1,10 @@
 import * as THREE from 'three';
+
 import Random from '../utilities/Random';
 import Constants from '../utilities/Constants';
 
-import fragmentshader from '../shaders/fragmentshader.glsl';
 import vertexshader from '../shaders/vertexshader.glsl';
+import fragmentshader from '../shaders/fragmentshader.glsl';
 
 export default class RainbowParticles {
   private static readonly OFFSET_X: number = 0.8;
@@ -35,10 +36,10 @@ export default class RainbowParticles {
     return this.particles;
   }
 
-  public update(playerPosition: THREE.Vector3, deltaTime: number) {
+  public update(position: THREE.Vector3, deltaTime: number) {
     this.recalculateHeightOffsets(deltaTime);
 
-    this.centerParticlesAround(playerPosition, deltaTime);
+    this.centerParticlesAround(position, deltaTime);
   }
 
   private recalculateHeightOffsets(deltaTime: number) {
@@ -78,7 +79,7 @@ export default class RainbowParticles {
   private createShaderMaterial(): THREE.ShaderMaterial {
     const uniforms = {
       color: { value: new THREE.Color(0xffffff) },
-      pointTexture: { value: new THREE.TextureLoader().load('../../assets/player_move_particle.png') },
+      pointTexture: { value: new THREE.TextureLoader().load('../../assets/rainbow_particle.png') },
     };
 
     const material = new THREE.ShaderMaterial({

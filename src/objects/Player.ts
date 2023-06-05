@@ -1,9 +1,12 @@
 import * as THREE from 'three';
-import InputManager, { InputKey } from '../managers/InputManager';
+
 import Ground from './Ground';
-import ThemeManager from '../managers/ThemeManager';
-import Constants from '../utilities/Constants';
 import RainbowParticles from './RainbowParticles';
+
+import Constants from '../utilities/Constants';
+
+import ThemeManager from '../managers/ThemeManager';
+import InputManager, { InputKey } from '../managers/InputManager';
 
 type Boundaries = {
   max: number;

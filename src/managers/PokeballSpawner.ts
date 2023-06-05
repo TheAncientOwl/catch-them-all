@@ -1,7 +1,8 @@
 import * as THREE from 'three';
 
-import Pokeball from '../objects/Pokeball';
 import SceneRenderer from './SceneRenderer';
+
+import Pokeball from '../objects/Pokeball';
 
 export default class PokeballSpawner {
   private fruits: Array<Pokeball>;

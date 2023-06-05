@@ -1,8 +1,10 @@
 import * as THREE from 'three';
 
 import Timer from './utilities/Timer';
+
 import Player from './objects/Player';
 import Ground from './objects/Ground';
+
 import TimeManager from './managers/TimeManager';
 import InputManager from './managers/InputManager';
 import SceneRenderer from './managers/SceneRenderer';

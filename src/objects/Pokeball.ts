@@ -1,9 +1,12 @@
 import * as THREE from 'three';
-import CollisionManager from '../managers/CollisionManager';
-import Random from '../utilities/Random';
+
 import Ground from './Ground';
+
+import Random from '../utilities/Random';
 import Constants from '../utilities/Constants';
+
 import ScoreManager from '../managers/ScoreManager';
+import CollisionManager from '../managers/CollisionManager';
 
 export default class Pokeball {
   private static readonly MIN_SPEED: number = 3;

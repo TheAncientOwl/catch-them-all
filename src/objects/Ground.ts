@@ -1,6 +1,8 @@
 import * as THREE from 'three';
-import ThemeManager from '../managers/ThemeManager';
+
 import Constants from '../utilities/Constants';
+
+import ThemeManager from '../managers/ThemeManager';
 
 export default class Ground {
   public static readonly WIDTH: number = 16;

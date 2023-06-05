@@ -1,8 +1,3 @@
-enum KeyEventType {
-  KeyDown = 'keydown',
-  KeyUp = 'keyup',
-}
-
 export enum InputKey {
   ArrowLeft = 'ArrowLeft',
   ArrowRight = 'ArrowRight',
@@ -14,9 +9,8 @@ export default class InputManager {
   constructor() {
     this.keys = {};
 
-    // Add event listeners for keydown and keyup events
-    document.addEventListener(KeyEventType.KeyDown, this.handleKeyDown.bind(this));
-    document.addEventListener(KeyEventType.KeyUp, this.handleKeyUp.bind(this));
+    document.addEventListener('keydown', this.handleKeyDown.bind(this));
+    document.addEventListener('keyup', this.handleKeyUp.bind(this));
   }
 
   private handleKeyDown(event: KeyboardEvent): void {

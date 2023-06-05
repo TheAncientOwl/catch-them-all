@@ -50,24 +50,6 @@ export default class Game {
     this.setupKeydownListener();
   }
 
-  private setupKeydownListener() {
-    document.addEventListener('keydown', event => {
-      if (event.key === 'r' || event.key === 'R') {
-        this.reset();
-      } else if (event.key === 'p' || event.key === 'P') {
-        if (!TimeManager.gameOver()) {
-          if (this.paused === true) {
-            this.paused = false;
-            this.pauseHTMLElement.style.display = 'none';
-          } else if (this.paused === false) {
-            this.paused = true;
-            this.pauseHTMLElement.style.display = 'block';
-          }
-        }
-      }
-    });
-  }
-
   public runGameLoop() {
     const deltaTime = this.timer.calculateDeltaTime();
 
@@ -85,5 +67,23 @@ export default class Game {
     TimeManager.reset();
     this.player.reset();
     this.fruitSpawner.reset();
+  }
+
+  private setupKeydownListener() {
+    document.addEventListener('keydown', event => {
+      if (event.key === 'r' || event.key === 'R') {
+        this.reset();
+      } else if (event.key === 'p' || event.key === 'P') {
+        if (!TimeManager.gameOver()) {
+          if (this.paused === true) {
+            this.paused = false;
+            this.pauseHTMLElement.style.display = 'none';
+          } else if (this.paused === false) {
+            this.paused = true;
+            this.pauseHTMLElement.style.display = 'block';
+          }
+        }
+      }
+    });
   }
 }

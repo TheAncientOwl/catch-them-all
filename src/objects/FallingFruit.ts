@@ -16,10 +16,7 @@ export default class FallingFruit {
   public constructor() {
     this.speed = Random.randBetween(FallingFruit.MIN_SPEED, FallingFruit.MAX_SPEED);
 
-    const geometry = new THREE.SphereGeometry(0.3, 32, 32);
-    const material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().fruit });
-
-    this.body = new THREE.Mesh(geometry, material);
+    this.body = this.makePokeball(0.4, 32, 32) as THREE.Mesh;
 
     this.randomizePosition();
 
@@ -59,5 +56,40 @@ export default class FallingFruit {
   public reset() {
     this.body.position.y = Random.randBetween(6, 9);
     this.speed = Random.randBetween(FallingFruit.MIN_SPEED, FallingFruit.MAX_SPEED);
+  }
+
+  private makePokeball(radius: number, widthSegments: number, heightSegments: number): THREE.Object3D {
+    const geometry = new THREE.SphereGeometry(radius, widthSegments, heightSegments);
+
+    // Get the vertex positions and indices
+    const positions = geometry.getAttribute('position').array as Float32Array;
+    const indices = geometry.getIndex()!.array as Uint16Array;
+
+    // Create materials for the two halves
+    const firstHalfMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const secondHalfMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
+    // Split the indices into two parts
+    const indexCount = indices.length;
+    const halfIndexCount = Math.floor(indexCount / 2);
+
+    // Create geometry and mesh for the first half
+    const firstHalfGeometry = new THREE.BufferGeometry();
+    firstHalfGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    firstHalfGeometry.setIndex(new THREE.BufferAttribute(indices.slice(0, halfIndexCount), 1));
+    const firstHalfMesh = new THREE.Mesh(firstHalfGeometry, firstHalfMaterial);
+
+    // Create geometry and mesh for the second half
+    const secondHalfGeometry = new THREE.BufferGeometry();
+    secondHalfGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    secondHalfGeometry.setIndex(new THREE.BufferAttribute(indices.slice(halfIndexCount), 1));
+    const secondHalfMesh = new THREE.Mesh(secondHalfGeometry, secondHalfMaterial);
+
+    // Create a parent object to hold both halves
+    const pokeball = new THREE.Object3D();
+    pokeball.add(firstHalfMesh);
+    pokeball.add(secondHalfMesh);
+
+    return pokeball;
   }
 }

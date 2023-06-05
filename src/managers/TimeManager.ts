@@ -1,4 +1,4 @@
-import ScoreManager from './Scoremanager';
+import ScoreManager from './ScoreManager';
 import ThemeManager from './ThemeManager';
 
 export default class TimeManager {

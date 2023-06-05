@@ -7,16 +7,18 @@ export default class PokeballSpawner {
   private fruits: Array<Pokeball>;
   private fruitCount: number;
 
-  public constructor() {
+  public constructor(sceneRenderer: SceneRenderer) {
     this.fruits = [];
     this.fruitCount = 6;
 
     for (let _ = 0; _ < this.fruitCount; _++) {
       this.fruits.push(new Pokeball());
     }
+
+    this.setupListener(sceneRenderer);
   }
 
-  public setupListener(sceneRenderer: SceneRenderer) {
+  private setupListener(sceneRenderer: SceneRenderer) {
     const input = document.getElementById('fruit-count');
     input?.addEventListener('input', e => {
       const inputValue = parseInt((e.target as HTMLInputElement).value);

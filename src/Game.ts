@@ -27,25 +27,21 @@ export default class Game {
     this.timer = new Timer();
 
     this.sceneRenderer = new SceneRenderer();
-
     this.lightingManager = new LightingManager();
-    this.lightingManager.createLighting();
-    this.lightingManager.addToSceneRenderer(this.sceneRenderer);
-
     this.inputManager = new InputManager();
 
     this.ground = new Ground();
-    this.sceneRenderer.add(this.ground.getObject3D());
-
     this.player = new Player();
-    this.sceneRenderer.add(this.player.getObject3D());
-    this.sceneRenderer.add(this.player.getParticleObject3D());
+    this.fruitSpawner = new PokeballSpawner(this.sceneRenderer);
 
-    this.fruitSpawner = new PokeballSpawner();
-    this.fruitSpawner.setupListener(this.sceneRenderer);
-    for (let fruit of this.fruitSpawner.getFruitsObject3D()) {
-      this.sceneRenderer.add(fruit);
-    }
+    const objects3D: Array<THREE.Object3D> = [];
+    objects3D.push(...this.lightingManager.getLights());
+    objects3D.push(...this.lightingManager.getLightHelpers());
+    objects3D.push(this.ground.getObject3D());
+    objects3D.push(this.player.getObject3D(), this.player.getParticleObject3D());
+    objects3D.push(...this.fruitSpawner.getFruitsObject3D());
+
+    objects3D.forEach(object3D => this.sceneRenderer.add(object3D));
 
     this.paused = false;
     this.pauseHTMLElement = document.getElementById('pause') as HTMLElement;
@@ -59,12 +55,18 @@ export default class Game {
       if (event.key === 'r' || event.key === 'R') {
         this.reset();
       } else if (event.key === 'p' || event.key === 'P') {
-        if (!TimeManager.gameOver()) this.pause();
+        if (!TimeManager.gameOver()) {
+          if (this.paused === true) {
+            this.paused = false;
+            this.pauseHTMLElement.style.display = 'none';
+          } else if (this.paused === false) {
+            this.paused = true;
+            this.pauseHTMLElement.style.display = 'block';
+          }
+        }
       }
     });
   }
-
-  private setupPause() {}
 
   public runGameLoop() {
     const deltaTime = this.timer.calculateDeltaTime();
@@ -83,15 +85,5 @@ export default class Game {
     TimeManager.reset();
     this.player.reset();
     this.fruitSpawner.reset();
-  }
-
-  private pause() {
-    if (this.paused === true) {
-      this.paused = false;
-      this.pauseHTMLElement.style.display = 'none';
-    } else if (this.paused === false) {
-      this.paused = true;
-      this.pauseHTMLElement.style.display = 'block';
-    }
   }
 }

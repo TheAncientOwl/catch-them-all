@@ -28,6 +28,10 @@ export default class TimeManager {
     this.gameOverHtmlElement.style.display = 'none';
   }
 
+  public static gameOver(): boolean {
+    return TimeManager.time <= 0;
+  }
+
   public static update(deltaTime: number, resetCallback: () => void = TimeManager.reset): boolean {
     TimeManager.time -= deltaTime;
 

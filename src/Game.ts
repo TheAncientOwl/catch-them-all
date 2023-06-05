@@ -51,7 +51,7 @@ export default class Game {
       if (event.key === 'r' || event.key === 'R') {
         this.reset();
       } else if (event.key === 'p' || event.key === 'P') {
-        this.pause();
+        if (!TimeManager.gameOver()) this.pause();
       }
     });
   }

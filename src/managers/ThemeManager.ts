@@ -9,7 +9,6 @@ export default class ThemeManager {
       background: '#150326',
       ground: '#5114A6',
       player: '#2B0B59',
-      fruit: '#F2A25C',
       light: '#F28066',
     },
     {
@@ -18,7 +17,6 @@ export default class ThemeManager {
       background: '#014040',
       ground: '#02735E',
       player: '#03A678',
-      fruit: '#731702',
       light: '#F27405',
     },
     {
@@ -27,7 +25,6 @@ export default class ThemeManager {
       background: '#04B2D9',
       ground: '#04D94F',
       player: '#F28705',
-      fruit: '#F2059F',
       light: '#F2CB05',
     },
     {
@@ -36,7 +33,6 @@ export default class ThemeManager {
       background: '#26240B',
       ground: '#593B16',
       player: '#BF9169',
-      fruit: '#F2C094',
       light: '#F2E3D5',
     },
     {
@@ -45,7 +41,6 @@ export default class ThemeManager {
       background: '#8C0327',
       ground: '#D9436B',
       player: '#732240',
-      fruit: '#F277A4',
       light: '#B3ECF2',
     },
 
@@ -55,7 +50,6 @@ export default class ThemeManager {
       background: '#262626',
       ground: '#595959',
       player: '#8C8C8C',
-      fruit: '#D9D9D9',
       light: '#F2F2F2',
     },
     {
@@ -64,7 +58,6 @@ export default class ThemeManager {
       background: '#0D0D0D',
       ground: '#911717',
       player: '#D9C6B0',
-      fruit: '#BF0413',
       light: '#FEE8DA',
     },
     {
@@ -73,7 +66,6 @@ export default class ThemeManager {
       background: '#730C02',
       ground: '#D92B04',
       player: '#F26B1D',
-      fruit: '#F2B441',
       light: '#F2E85E',
     },
     {
@@ -82,7 +74,6 @@ export default class ThemeManager {
       background: '#020D0C',
       ground: '#49BF9E',
       player: '#205B73',
-      fruit: '#307B8C',
       light: '#307B8C',
     },
   ];

@@ -19,10 +19,6 @@ export default class FallingFruit {
     this.body = this.makePokeball(0.4, 32, 32) as THREE.Mesh;
 
     this.randomizePosition();
-
-    ThemeManager.onThemeChanged(() => {
-      this.body.material = new THREE.MeshBasicMaterial({ color: ThemeManager.getTheme().fruit });
-    });
   }
 
   public getObject3D(): THREE.Object3D {

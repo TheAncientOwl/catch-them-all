@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 
-import FallingFruit from '../objects/FallingFruit';
+import Pokeball from '../objects/Pokeball';
 import SceneRenderer from './SceneRenderer';
 
-export default class FruitSpawner {
-  private fruits: Array<FallingFruit>;
+export default class PokeballSpawner {
+  private fruits: Array<Pokeball>;
   private fruitCount: number;
 
   public constructor() {
@@ -12,7 +12,7 @@ export default class FruitSpawner {
     this.fruitCount = 6;
 
     for (let _ = 0; _ < this.fruitCount; _++) {
-      this.fruits.push(new FallingFruit());
+      this.fruits.push(new Pokeball());
     }
   }
 
@@ -23,7 +23,7 @@ export default class FruitSpawner {
       if (inputValue <= 0) return;
 
       for (; this.fruitCount < inputValue; this.fruitCount++) {
-        const newFruit = new FallingFruit();
+        const newFruit = new Pokeball();
         this.fruits.push(newFruit);
         sceneRenderer.add(newFruit.getObject3D());
       }

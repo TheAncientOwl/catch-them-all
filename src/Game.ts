@@ -6,14 +6,14 @@ import Player from './objects/Player';
 import InputManager from './managers/InputManager';
 import Timer from './utilities/Timer';
 import Ground from './objects/Ground';
-import FruitSpawner from './managers/FruitSpawner';
+import PokeballSpawner from './managers/PokeballSpawner';
 import TimeManager from './managers/TimeManager';
 
 export default class Game {
   private sceneRenderer: SceneRenderer;
   private lightingManager: LightingManager;
   private inputManager: InputManager;
-  private fruitSpawner: FruitSpawner;
+  private fruitSpawner: PokeballSpawner;
   private timer: Timer;
   private player: Player;
   private ground: Ground;
@@ -37,7 +37,7 @@ export default class Game {
     this.sceneRenderer.add(this.player.getObject3D());
     this.sceneRenderer.add(this.player.getParticleObject3D());
 
-    this.fruitSpawner = new FruitSpawner();
+    this.fruitSpawner = new PokeballSpawner();
     this.fruitSpawner.setupListener(this.sceneRenderer);
     for (let fruit of this.fruitSpawner.getFruitsObject3D()) {
       this.sceneRenderer.add(fruit);

@@ -2,11 +2,10 @@ import * as THREE from 'three';
 import CollisionManager from '../managers/CollisionManager';
 import Random from '../utilities/Random';
 import Ground from './Ground';
-import ThemeManager from '../managers/ThemeManager';
 import Constants from '../utilities/Constants';
 import ScoreManager from '../managers/ScoreManager';
 
-export default class FallingFruit {
+export default class Pokeball {
   private static readonly MIN_SPEED: number = 3;
   private static readonly MAX_SPEED: number = 4;
 
@@ -14,7 +13,7 @@ export default class FallingFruit {
   private speed: number;
 
   public constructor() {
-    this.speed = Random.randBetween(FallingFruit.MIN_SPEED, FallingFruit.MAX_SPEED);
+    this.speed = Random.randBetween(Pokeball.MIN_SPEED, Pokeball.MAX_SPEED);
 
     this.body = this.makePokeball(0.4, 32, 32) as THREE.Mesh;
 
@@ -29,7 +28,7 @@ export default class FallingFruit {
     this.body.position.y -= this.speed * deltaTime;
 
     if (this.body.position.y < Constants.GROUND_LEVEL + 0.25) {
-      this.speed = Random.randBetween(FallingFruit.MIN_SPEED, FallingFruit.MAX_SPEED);
+      this.speed = Random.randBetween(Pokeball.MIN_SPEED, Pokeball.MAX_SPEED);
       this.randomizePosition();
     }
 
@@ -51,7 +50,7 @@ export default class FallingFruit {
 
   public reset() {
     this.body.position.y = Random.randBetween(6, 9);
-    this.speed = Random.randBetween(FallingFruit.MIN_SPEED, FallingFruit.MAX_SPEED);
+    this.speed = Random.randBetween(Pokeball.MIN_SPEED, Pokeball.MAX_SPEED);
   }
 
   private makePokeball(radius: number, widthSegments: number, heightSegments: number): THREE.Object3D {

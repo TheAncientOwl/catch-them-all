@@ -10,5 +10,4 @@ ScoreManager.setup();
 TimeManager.setup();
 
 const game = new Game();
-
 game.runGameLoop();

@@ -15,10 +15,10 @@
       &nbsp;Enjoy the game and try to catch as many pokeballs as possible within the time limit!
     </p>
 </div>
-<hr><br>
+<hr>
 
 <h2>🛠️ Tech Stack: <h3>TypeScript, ThreeJS, HTML5, CSS3</h3></h2>
-<hr><br>
+<hr>
 
 <h2>✨ Features</h2>
 <ul>
@@ -31,7 +31,7 @@
     <li>game reset functionality by pressing the "R" key.</li>
     <li>game pause functionality by pressing the "P" key.</li>
 </ul>
-<hr><br>
+<hr>
 
 <h2>🐆 How to run</h2>
 
@@ -43,9 +43,9 @@ $ npm run dev
 
 open http://localhost:5173 in any browser (the link may differ, check the console)
 ```
-<hr><br>
+<hr>
 
 <h2>💫 Demo</h2>
 <video src="demo.mp4" controls="controls" style="max-width: 720px;">
 </video>
-<hr><br>
+<hr>

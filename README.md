@@ -46,5 +46,7 @@ open http://localhost:5173 in any browser (the link may differ, check the consol
 <hr>
 
 <h2>💫 Demo</h2>
+
 [![Demo](https://img.youtube.com/vi/QvZngtf8nRI/0.jpg)](https://www.youtube.com/watch?v=QvZngtf8nRI)
+
 <hr>
